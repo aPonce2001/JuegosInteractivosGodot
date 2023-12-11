@@ -1,8 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdysyd77h4a74"]
+[gd_scene load_steps=6 format=3 uid="uid://cdysyd77h4a74"]
 
 [ext_resource type="PackedScene" uid="uid://c1dcryri2wl2s" path="res://scenes/player.tscn" id="1_7ab3j"]
+[ext_resource type="Script" path="res://scripts/level-1.gd" id="1_cj8o1"]
+[ext_resource type="PackedScene" uid="uid://c8gv3bq1cjtad" path="res://scenes/maze.tscn" id="2_jo67u"]
+[ext_resource type="Texture2D" uid="uid://cr27wdx4hnmmb" path="res://assets/background/GameTileBG_01.png" id="3_37l02"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0vlgi"]
+font_size = 38
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_cj8o1")
 
 [node name="Player" parent="." instance=ExtResource("1_7ab3j")]
-position = Vector2(474, 240)
+position = Vector2(234, 102)
+
+[node name="Maze" parent="." instance=ExtResource("2_jo67u")]
+z_index = -1
+position = Vector2(759, 706)
+scale = Vector2(4.8048, 4.8048)
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(194, -147)
+scale = Vector2(200, 200)
+texture = ExtResource("3_37l02")
+
+[node name="Start" type="Label" parent="."]
+offset_left = 484.0
+offset_top = 52.0
+offset_right = 627.0
+offset_bottom = 122.0
+text = "START"
+label_settings = SubResource("LabelSettings_0vlgi")
+
+[node name="End" type="Label" parent="."]
+offset_left = 1877.0
+offset_top = -604.0
+offset_right = 2020.0
+offset_bottom = -534.0
+text = "END
+"
+label_settings = SubResource("LabelSettings_0vlgi")
+
+[node name="Rules" type="Label" parent="."]
+offset_left = -307.0
+offset_top = -81.0
+offset_right = 248.0
+offset_bottom = 409.0
+text = "Bienvenido a UFO Racer
+Controles:
+- Up
+- Down
+- Left
+- Right
+¡No te choques!"
+label_settings = SubResource("LabelSettings_0vlgi")
+
+[connection signal="body_exited" from="Maze" to="." method="_on_maze_body_exited"]

@@ -7,16 +7,22 @@
 radius = 109.036
 
 [node name="Player" type="RigidBody2D"]
-mass = 0.03
+mass = 0.18
 center_of_mass_mode = 1
 gravity_scale = 0.0
-linear_damp = 100.0
+linear_damp = 10.0
 script = ExtResource("1_qflvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.325, 0.325)
 texture = ExtResource("1_l4ndf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.00001, 8.99998)
+position = Vector2(0, 7)
+scale = Vector2(0.650179, 0.650179)
 shape = SubResource("CircleShape2D_yqxwl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 7)
+position_smoothing_enabled = true
+drag_vertical_enabled = true
