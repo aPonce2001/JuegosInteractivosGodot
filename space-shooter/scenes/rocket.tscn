@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://tqa8jjruim2"]
+
+[ext_resource type="Texture2D" uid="uid://bdksspc1rwmvh" path="res://assets/PNG/Lasers/laserBlue16.png" id="1_1ddu0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1bbpm"]
+radius = 7.0
+height = 58.0
+
+[node name="rocket" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_1ddu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1bbpm")
