@@ -13,6 +13,9 @@ extends CharacterBody2D
 @export var clamp_padding_y = 30
 
 
+@export var slow_move_factor = 0.5
+
+
 var rocket_scene
 
 
@@ -37,6 +40,12 @@ func process_input_for_actions():
 		$shoot_timer.start()
 	if Input.is_action_just_released("shoot"):
 		$shoot_timer.stop()
+	
+	if Input.is_action_just_pressed("slow_move"):
+		speed = slow_move_factor * speed
+	if Input.is_action_just_released("slow_move"):
+		speed = (1/slow_move_factor) * speed 
+	
 
 
 func shoot():

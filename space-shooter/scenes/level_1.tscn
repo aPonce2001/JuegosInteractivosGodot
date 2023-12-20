@@ -1,10 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://brr5k5yi8ra1r"]
 
+[ext_resource type="Script" path="res://scripts/level_1.gd" id="1_k5u37"]
 [ext_resource type="Texture2D" uid="uid://dtj1wq6fcuqv0" path="res://assets/Backgrounds/purple.png" id="1_mlw2r"]
 [ext_resource type="PackedScene" uid="uid://gvann2xs3ths" path="res://scenes/player.tscn" id="2_h12dn"]
-[ext_resource type="PackedScene" uid="uid://36a60kwkdpfh" path="res://scenes/enemy.tscn" id="3_d5w2g"]
 
 [node name="level1" type="Node2D"]
+script = ExtResource("1_k5u37")
 
 [node name="player" parent="." instance=ExtResource("2_h12dn")]
 position = Vector2(133, 329)
@@ -19,5 +20,8 @@ offset_bottom = 674.0
 texture = ExtResource("1_mlw2r")
 stretch_mode = 1
 
-[node name="enemy" parent="." instance=ExtResource("3_d5w2g")]
-position = Vector2(1062, 334)
+[node name="enemy-timer" type="Timer" parent="."]
+wait_time = 0.133
+autostart = true
+
+[connection signal="timeout" from="enemy-timer" to="." method="_on_enemytimer_timeout"]
