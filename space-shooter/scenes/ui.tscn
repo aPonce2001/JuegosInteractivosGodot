@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://7roweb4qwrm5"]
+
+[ext_resource type="Texture2D" uid="uid://b1dxurbsdv1ym" path="res://assets/PNG/playerShip3_red.png" id="1_2seks"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_pvkke"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.0
+offset_top = -326.5
+offset_right = 580.0
+offset_bottom = 326.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pvkke")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 18.5
+offset_right = 84.0
+offset_bottom = 44.5
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+
+[node name="LivesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 82.5
+offset_right = 157.0
+offset_bottom = 108.5
+text = "3"
+
+[node name="PlayerIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 81.5
+offset_right = 154.0
+offset_bottom = 156.5
+scale = Vector2(0.308678, 0.30685)
+texture = ExtResource("1_2seks")
+
+[node name="XLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 82.5
+offset_right = 134.0
+offset_bottom = 108.5
+text = "X"

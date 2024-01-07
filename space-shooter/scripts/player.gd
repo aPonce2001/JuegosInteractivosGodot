@@ -2,25 +2,16 @@ extends CharacterBody2D
 
 
 @export var speed = 400
-
-
 @export var bullet_speed = 2000
-
-
 @export var clamp_padding_x = 30
-
-
 @export var clamp_padding_y = 30
-
-
 @export var slow_move_factor = 0.5
+@onready var rocket_scene = preload("res://scenes/bullet.tscn")
+signal took_damage
+@onready var shoot_stream_player = $ShootStreamPlayer
+@onready var hurt_stream_player = $HurtStreamPlayer
+@onready var dead_stream_player = $DeadStreamPlayer
 
-
-var rocket_scene
-
-
-func _ready():
-	rocket_scene = load("res://scenes/rocket.tscn")
 
 func process_input_for_movement():
 	var direction = Vector2()
@@ -53,6 +44,7 @@ func shoot():
 	rocket_instance.speed = bullet_speed
 	rocket_instance.position = global_position
 	get_parent().add_child(rocket_instance)
+	shoot_stream_player.play()
 
 
 func _process(delta):
@@ -75,3 +67,16 @@ func clamp_global_position():
 
 func _on_shoot_timer_timeout():
 	shoot()
+
+
+func take_damage():
+	hurt_stream_player.play()
+	emit_signal("took_damage")
+
+
+func die():
+	dead_stream_player.play()
+	hide()
+	set_collision_layer_value(1, false)
+	await dead_stream_player.finished
+	queue_free()

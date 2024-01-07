@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://brr5k5yi8ra1r"]
+[gd_scene load_steps=7 format=3 uid="uid://brr5k5yi8ra1r"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_k5u37"]
 [ext_resource type="Texture2D" uid="uid://dtj1wq6fcuqv0" path="res://assets/Backgrounds/purple.png" id="1_mlw2r"]
 [ext_resource type="PackedScene" uid="uid://gvann2xs3ths" path="res://scenes/player.tscn" id="2_h12dn"]
+[ext_resource type="PackedScene" uid="uid://vo1xom518pax" path="res://scenes/enemy_spawner.tscn" id="4_a0s5o"]
+[ext_resource type="PackedScene" uid="uid://7roweb4qwrm5" path="res://scenes/ui.tscn" id="5_yr4eu"]
+[ext_resource type="PackedScene" uid="uid://cbovd5gfmlkl2" path="res://scenes/death_zone.tscn" id="6_60cuq"]
 
 [node name="level1" type="Node2D"]
 script = ExtResource("1_k5u37")
 
 [node name="player" parent="." instance=ExtResource("2_h12dn")]
 position = Vector2(133, 329)
+speed = 550
 
 [node name="background" type="TextureRect" parent="."]
 z_index = -10
@@ -20,8 +24,13 @@ offset_bottom = 674.0
 texture = ExtResource("1_mlw2r")
 stretch_mode = 1
 
-[node name="enemy-timer" type="Timer" parent="."]
-wait_time = 0.133
-autostart = true
+[node name="enemy-spawner" parent="." instance=ExtResource("4_a0s5o")]
 
-[connection signal="timeout" from="enemy-timer" to="." method="_on_enemytimer_timeout"]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="HUD" instance=ExtResource("5_yr4eu")]
+
+[node name="DeathZone" parent="." instance=ExtResource("6_60cuq")]
+
+[connection signal="took_damage" from="player" to="." method="_on_player_took_damage"]
+[connection signal="enemy_spawned" from="enemy-spawner" to="." method="_on_enemyspawner_enemy_spawned"]

@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://gvann2xs3ths"]
+[gd_scene load_steps=7 format=3 uid="uid://gvann2xs3ths"]
 
 [ext_resource type="Texture2D" uid="uid://b1dxurbsdv1ym" path="res://assets/PNG/playerShip3_red.png" id="1_kleqe"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_no17a"]
+[ext_resource type="AudioStream" uid="uid://slpu228bnwn8" path="res://assets/sfx/shoot.wav" id="3_3nbej"]
+[ext_resource type="AudioStream" uid="uid://bwv1xcu1xhjv5" path="res://assets/sfx/damage.wav" id="4_epxq6"]
+[ext_resource type="AudioStream" uid="uid://n6jdwahxuxw0" path="res://assets/sfx/dead.wav" id="5_fq5gd"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ij3xr"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -14,9 +23,23 @@ rotation = 1.5708
 texture = ExtResource("1_kleqe")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.942814, 0.673164)
 polygon = PackedVector2Array(24, 0, -18, -28, -28, -1, -19, 26)
 
 [node name="shoot_timer" type="Timer" parent="."]
 wait_time = 0.15
+
+[node name="ShootStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3nbej")
+
+[node name="HurtStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_epxq6")
+
+[node name="DeadStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fq5gd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_ij3xr")
 
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

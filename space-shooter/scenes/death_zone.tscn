@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbovd5gfmlkl2"]
+
+[ext_resource type="Script" path="res://scripts/death_zone.gd" id="1_8yhsy"]
+
+[node name="DeathZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_8yhsy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-62, -78, -47, 690, -161, 687, -167, -84)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
