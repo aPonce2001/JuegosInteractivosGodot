@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp6wxea1poc22"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_em17c"]
+[ext_resource type="PackedScene" uid="uid://cm7qxhfjkknqu" path="res://scenes/win_screen.tscn" id="2_3by1w"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_em17c")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = 9.0
+offset_right = -1.5
+offset_bottom = 35.0
+grow_horizontal = 2
+text = "TIME:"
+
+[node name="LeftTimeLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 3.0
+offset_top = 9.0
+offset_right = 43.0
+offset_bottom = 35.0
+grow_horizontal = 2
+text = "000"
+
+[node name="WinScreen" parent="." instance=ExtResource("2_3by1w")]
+visible = false

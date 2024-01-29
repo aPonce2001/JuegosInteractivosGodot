@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2o7hknmj65oh"]
+
+[ext_resource type="Texture2D" uid="uid://bk2ry1675sna2" path="res://assets/traps/fire/On (16x32).png" id="1_m1dq4"]
+[ext_resource type="Script" path="res://scripts/trap.gd" id="1_qkocc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hdru"]
+size = Vector2(10, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_35bfl"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi48p"]
+atlas = ExtResource("1_m1dq4")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evuh0"]
+atlas = ExtResource("1_m1dq4")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41rac"]
+atlas = ExtResource("1_m1dq4")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_356e8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi48p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evuh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41rac")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 7.0
+}]
+
+[sub_resource type="Animation" id="Animation_b1k1s"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_8kjc4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_quq2p"]
+_data = {
+"RESET": SubResource("Animation_8kjc4"),
+"idle": SubResource("Animation_b1k1s")
+}
+
+[node name="Fire" type="Node2D"]
+script = ExtResource("1_qkocc")
+
+[node name="Fire" type="Area2D" parent="."]
+position = Vector2(0, -10)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fire"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_0hdru")
+
+[node name="Block" type="StaticBody2D" parent="."]
+position = Vector2(0, -10)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_35bfl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_356e8")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_quq2p")
+}
+
+[connection signal="body_entered" from="Fire" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://24c44pongq5x"]
+
+[ext_resource type="Texture2D" uid="uid://cc3jtxc6xn7wq" path="res://assets/paralax/parallax-00.png" id="1_r2tjy"]
+[ext_resource type="Texture2D" uid="uid://ctuhtd2npmpax" path="res://assets/paralax/parallax-01.png" id="2_4xsau"]
+[ext_resource type="Script" path="res://scripts/clouds.gd" id="2_lke1f"]
+[ext_resource type="Texture2D" uid="uid://dfos3japaxr4a" path="res://assets/paralax/parallax-02.png" id="3_pxcy7"]
+[ext_resource type="Texture2D" uid="uid://blsbooyxg0546" path="res://assets/paralax/parallax-03.png" id="4_108a0"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="Background" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(0, -50)
+texture = ExtResource("1_r2tjy")
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.3, 0.3)
+script = ExtResource("2_lke1f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Clouds"]
+position = Vector2(0, -50)
+texture = ExtResource("2_4xsau")
+
+[node name="Mountain" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Mountain"]
+position = Vector2(0, -50)
+texture = ExtResource("3_pxcy7")
+
+[node name="Trees" type="ParallaxLayer" parent="."]
+texture_repeat = 3
+motion_scale = Vector2(0.7, 0.7)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Trees"]
+position = Vector2(0, -50)
+texture = ExtResource("4_108a0")
