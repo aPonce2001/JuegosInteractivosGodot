@@ -5,7 +5,11 @@ extends CharacterBody2D
 @export var jump_velocity = -400.0
 var active = true
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+const lines: Array[String] = [
+	"Hello, this is my adventure!",
+	"Second line",
+	"Third line"
+]
 
 @onready var player_sprite = $AnimatedSprite2D
 
@@ -19,7 +23,10 @@ func _physics_process(delta):
 	var direction = 0
 	if active:
 		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y += jump_velocity
+			jump()
+			
+		if Input.is_action_just_pressed("dialog"):
+			DialogManager.start_dialog(global_position, lines)
 		
 		direction = Input.get_axis("move_left", "move_right")
 		velocity.x = direction * speed
@@ -28,6 +35,9 @@ func _physics_process(delta):
 	move_and_slide()
 	update_animations(direction)
 
+func jump():
+	AudioPlayer.play_sfx("jump")
+	velocity.y += jump_velocity
 
 func update_animations(direction):
 	if not is_on_floor():

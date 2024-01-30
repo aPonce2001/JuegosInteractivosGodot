@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://w1l2cqlv732j"]
+
+[ext_resource type="AudioStream" uid="uid://bxhv60peauxev" path="res://assets/bgm/background.ogg" id="1_evwx8"]
+[ext_resource type="Script" path="res://scripts/audio_player.gd" id="1_ul0tg"]
+
+[node name="AudioPlayer" type="Node"]
+script = ExtResource("1_ul0tg")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_evwx8")
+autoplay = true

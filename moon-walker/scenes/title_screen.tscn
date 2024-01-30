@@ -48,6 +48,7 @@ offset_bottom = 157.0
 text = "Start"
 
 [node name="Quit" type="Button" parent="HUD/Title"]
+layout_mode = 0
 offset_left = 213.0
 offset_top = 122.0
 offset_right = 255.0

@@ -45,6 +45,7 @@ func _reset_player():
 
 
 func _on_trap_player_hit():
+	AudioPlayer.play_sfx("hurt")
 	_reset_player()
 
 
